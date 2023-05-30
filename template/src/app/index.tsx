@@ -1,9 +1,17 @@
 import React, { Suspense } from "react";
 
-const AppPage = React.lazy(() => import("./Page"));
+const AppInitializationPage = React.lazy(
+  () => import("./AppInitializationPage")
+);
 
 export const App = (): JSX.Element => (
-  <Suspense fallback={<div>Загрузка. Ожидайте</div>}>
-    <AppPage />
+  <Suspense
+    fallback={
+      <div style={{ width: "100vw", padding: "40px", textAlign: "center" }}>
+        Загрузка...
+      </div>
+    }
+  >
+    <AppInitializationPage />
   </Suspense>
 );
