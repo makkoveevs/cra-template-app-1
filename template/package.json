@@ -107,7 +107,6 @@
   },
   "author": "Makkoveev S.",
   "license": "MIT",
-  "private": "true",
   "keywords": [
     "react",
     "create-react-app",
