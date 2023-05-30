@@ -28,6 +28,7 @@
     "downlevelIteration": true,
     "baseUrl": "./",
     "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node"],
     "target": "ES6",
     "module": "ESNext",
     "paths": {
