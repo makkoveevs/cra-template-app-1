@@ -7,8 +7,8 @@ const rootDir = path.resolve(__dirname, "..", "..", "..");
 const definePlugins = (env) => {
   let retValue = [
     new HtmlWebpackPlugin({
-      favicon: path.resolve(rootDir, "src/public/favicon.ico"),
-      template: path.resolve(rootDir, "src/public/index.html"),
+      favicon: path.resolve(rootDir, "public/favicon.ico"),
+      template: path.resolve(rootDir, "public/index.html"),
       publicPath: "/",
     }),
     new webpack.ProvidePlugin({
