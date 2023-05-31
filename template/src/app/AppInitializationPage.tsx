@@ -1,4 +1,5 @@
 import { StoreContext, createStore } from "src/modules/Store";
+import "src/styles/index.css";
 
 const AppStoreContextValue = createStore();
 
