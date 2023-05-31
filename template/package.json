@@ -1,7 +1,7 @@
 {
-  "name": "cra-template-app-1",
+  "name": "web-app-template",
   "version": "1.0.0",
-  "description": "Front app",
+  "description": "Front app from template",
   "main": "index.tsx",
   "scripts": {
     "start": "webpack-dev-server --env NODE_ENV=development --mode=development --config configs/webpack/common.config.js",
