@@ -9,7 +9,7 @@
     "check-types": "tsc --noEmit",
     "test": "jest",
     "lint": "TIMING=1 ISLINT=1 eslint --cache src",
-    "prepare": "husky install",
+    "prepare": "node -e \"if(require('fs').existsSync('.git')){process.exit(1)}\" || husky install",
     "pre-commit": "lint-staged"
   },
   "dependencies": {

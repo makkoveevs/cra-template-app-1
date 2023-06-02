@@ -1,13 +1,17 @@
 import { action, makeObservable, observable } from "mobx";
+import { DEFAULT_TITLE } from "./constants";
 
 export class AppStore {
-  prop: string | undefined;
+  title: string | undefined = DEFAULT_TITLE;
+  isAuth: boolean = false;
 
   constructor() {
     makeObservable(this, {
-      prop: observable,
+      title: observable,
+      isAuth: observable,
 
-      setProp: action,
+      setTitle: action,
+      setIsAuth: action,
     });
   }
 
@@ -16,10 +20,15 @@ export class AppStore {
   };
 
   public destroy = (): void => {
-    this.setProp(undefined);
+    this.setTitle(undefined);
+    this.setIsAuth(false);
   };
 
-  public setProp = (data?: string): void => {
-    this.prop = data;
+  public setTitle = (value?: string): void => {
+    this.title = value ?? DEFAULT_TITLE;
+  };
+
+  public setIsAuth = (value: boolean): void => {
+    this.isAuth = value;
   };
 }

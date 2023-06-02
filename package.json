@@ -1,6 +1,6 @@
 {
   "name": "cra-template-app-1",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Front app from template",
   "main": "index.tsx",
   "scripts": {
@@ -9,7 +9,7 @@
     "check-types": "tsc --noEmit",
     "test": "jest",
     "lint": "TIMING=1 ISLINT=1 eslint --cache src",
-    "prepare": "husky install",
+    "prepare": "node -e \"if(require('fs').existsSync('.git')){process.exit(1)}\" || husky install",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
