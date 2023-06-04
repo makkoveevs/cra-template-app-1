@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MenuItems = styled.div`
   position: relative;
-  width: 400px; // TODO media
+  width: 100%;
 
   display: flex;
   flex-flow: column nowrap;
