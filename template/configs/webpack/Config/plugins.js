@@ -4,6 +4,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const rootDir = path.resolve(__dirname, "..", "..", "..");
 
+const fs = require("fs");
+const envFilename = ".env";
+
+const ENV_PREFIX = "APP_"; // variables in .env.* files may starts with this prefix. prefix may setted over command line variables
+
 const definePlugins = (env) => {
   let retValue = [
     new HtmlWebpackPlugin({
@@ -37,6 +42,44 @@ const definePlugins = (env) => {
       })
     );
   }
+
+  if (env.NODE_ENV === "production") {
+    const envFile = rootDir + "/" + envFilename + ".production";
+    try {
+      if (fs.existsSync(envFile)) {
+        require("dotenv").config({ path: envFile });
+      }
+    } catch (_e) {
+      // nothing
+    }
+  }
+
+  if (["development"].includes(env.NODE_ENV)) {
+    const envFile = rootDir + "/" + envFilename + ".development";
+    try {
+      if (fs.existsSync(envFile)) {
+        require("dotenv").config({ path: envFile });
+      }
+    } catch (_e) {
+      // nothing
+    }
+  }
+
+  const PREFIX = env.ENV_PREFIX ?? ENV_PREFIX;
+
+  const APP_ENV_VARIABLES = Object.keys(process.env).filter((key) =>
+    key.startsWith(PREFIX)
+  );
+
+  const variablesFromEnvFile = APP_ENV_VARIABLES.map(
+    (v) =>
+      new webpack.DefinePlugin({
+        [`process.env.${v.replace(PREFIX, "")}`]: JSON.stringify(
+          process.env[v]
+        ),
+      })
+  );
+  retValue.push(...variablesFromEnvFile);
 
   return retValue;
 };

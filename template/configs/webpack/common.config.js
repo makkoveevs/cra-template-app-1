@@ -2,6 +2,8 @@
 
 const path = require("path");
 const rootDir = path.resolve(__dirname, "..", "..");
+const fs = require("fs");
+const envFilename = ".env";
 
 const {
   optimization,
@@ -43,6 +45,15 @@ module.exports = (env) => {
   };
 
   if (env.NODE_ENV === "production") {
+    const envFile = rootDir + "/" + envFilename + ".production";
+    try {
+      if (fs.existsSync(envFile)) {
+        require("dotenv").config({ path: envFile });
+      }
+    } catch (_e) {
+      // nothing
+    }
+
     const TerserPlugin = require("terser-webpack-plugin");
     const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
     const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -63,6 +74,15 @@ module.exports = (env) => {
   }
 
   if (["development"].includes(env.NODE_ENV) && !process.env.ISLINT) {
+    const envFile = rootDir + "/" + envFilename + ".development";
+    try {
+      if (fs.existsSync(envFile)) {
+        require("dotenv").config({ path: envFile });
+      }
+    } catch (_e) {
+      // nothing
+    }
+
     const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
     commonWebpackConfig.optimization = { ...optimization };
