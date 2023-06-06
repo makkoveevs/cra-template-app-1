@@ -1,6 +1,5 @@
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { AxiosRequestConfigWithDelayed, TServiceUrlsConfig } from "./types";
-import { API_SERVICE_LOCATION, API_SERVICE_URL } from "./constants";
 import {
   ACCESS_TOKEN_STORAGE_KEY,
   APP_LOGIN_LOCATIOIN,
@@ -15,7 +14,7 @@ import {
 let axiosSingletoneInstance: AxiosService | undefined;
 
 const DEFAULT_SERVICE_URLS: Required<TServiceUrlsConfig> = {
-  api: API_SERVICE_URL + "/" + API_SERVICE_LOCATION,
+  api: process.env.API_URL ?? "http://localhost",
 };
 
 export class AxiosService {
@@ -100,7 +99,7 @@ export class AxiosService {
         },
 
         async (error: any): Promise<any> => {
-          if (error.response.status === EXPIRED_TOKEN_RESPONSE_STATUS) {
+          if (error?.response?.status === EXPIRED_TOKEN_RESPONSE_STATUS) {
             //remeber the originalRequest to repeat it later
             const originalRequest =
               error.config as AxiosRequestConfigWithDelayed;
