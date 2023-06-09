@@ -7,10 +7,6 @@
   "engines": {
     "node": ">=18"
   },
-  "files": [
-    "template",
-    "template.json"
-  ],
   "keywords": [
     "react",
     "create-react-app",
