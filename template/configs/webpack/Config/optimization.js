@@ -23,7 +23,7 @@ module.exports = {
       },
       initPage: {
         name: "initPage",
-        test: /src[\\/]app[\\/](index|App)/,
+        test: /src[\\/]app[\\/](index|AppInitializationPage)/,
         chunks: "initial",
         enforce: true,
         priority: 100,

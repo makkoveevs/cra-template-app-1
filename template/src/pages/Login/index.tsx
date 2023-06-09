@@ -5,7 +5,7 @@ import { Grid, GridItem } from "src/components/GridLayout";
 import { routes } from "src/modules/Routes/routes";
 import { useStore } from "src/modules/Store";
 
-const MOCK_CREDENTIALS = { login: "admin", password: "1" };
+const MOCK_CREDENTIALS = { username: "admin", password: "1" };
 
 export const Login = observer((): JSX.Element => {
   const { isAuth, setIsAuth } = useStore();
@@ -19,10 +19,10 @@ export const Login = observer((): JSX.Element => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    const login = formData.get("login");
+    const login = formData.get("username");
     const password = formData.get("password");
     if (
-      login === MOCK_CREDENTIALS.login &&
+      login === MOCK_CREDENTIALS.username &&
       password === MOCK_CREDENTIALS.password
     ) {
       setIsAuth(true);
@@ -41,31 +41,33 @@ export const Login = observer((): JSX.Element => {
       <GridItem $colStart={2} $colEnd={2} $rowStart={2} $rowEnd={2}>
         {isAuth ? (
           <button type="button" onClick={handleLogout}>
-            Выйти
+            Logout
           </button>
         ) : (
           <form onSubmit={handleLogin}>
             <label>
-              Имя пользователя:
+              Username
               <input
-                placeholder="Введите имя пользователя"
-                name="login"
+                placeholder={`Enter username (default ${MOCK_CREDENTIALS.username})`}
+                name="username"
+                autoComplete="username"
                 type="text"
                 // value={login}
                 // onChange={(e) => setLogin(e.target.value)}
               />
             </label>
             <label>
-              Пароль:{" "}
+              Password
               <input
-                placeholder="Введите пароль"
+                placeholder={`Enter password (default ${MOCK_CREDENTIALS.password})`}
                 name="password"
                 type="password"
+                autoComplete="current-password"
                 // value={password}
                 // onChange={(e) => setPassword(e.target.value)}
               ></input>
             </label>
-            <button type="submit">Войти</button>
+            <button type="submit">Log in</button>
           </form>
         )}
       </GridItem>

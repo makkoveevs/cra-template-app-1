@@ -25,16 +25,11 @@ const babelLoaderTSX = {
 
 const mediaFileLoader = {
   test: /\.(png|jpg|woff|woff2|eot|otf|gif|ico|mp4|webm|webp|jpeg)$/,
-  type: "asset",
-  // use: [
-  //   {
-  //     loader: "file-loader",
-  //     options: {
-  //       outputPath: "assets",
-  //       name: "[name].[ext]"
-  //     }
-  //   }
-  // ]
+  loader: "file-loader",
+  options: {
+    outputPath: "assets/media",
+    name: "[name].[ext]",
+  },
 };
 
 const svgLoader = {
@@ -49,7 +44,7 @@ const svgNodeModulesLoader = {
     {
       loader: "file-loader",
       options: {
-        outputPath: "assets",
+        outputPath: "assets/svg",
       },
     },
   ],
@@ -57,7 +52,7 @@ const svgNodeModulesLoader = {
 
 const fontLoader = {
   test: /\.ttf/,
-  type: "asset",
+  type: "assets/fonts",
 };
 
 const defineRules = (env) => {
